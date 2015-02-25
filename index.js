@@ -4,6 +4,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 
 var targetUrl = "http://c.xkcd.com/random/comic/";
+var googleTrendUrl = "http://hawttrends.appspot.com/api/terms/";
 
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
@@ -73,6 +74,16 @@ app.get('/xkcd_jsonp', function(req, res){
 				img_url: imgSrc,
 				title: title
 			});
+		}else{
+			res.status(500).jsonp({error : error.toString()});
+		}
+	});
+});
+
+app.get('/google_trends', function(req, res){
+	request(googleTrendUrl, function(error, response, body){
+		if(!error && response.statusCode == 200){
+			res.jsonp(JSON.parse(body));
 		}else{
 			res.status(500).jsonp({error : error.toString()});
 		}

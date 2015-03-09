@@ -8,6 +8,6 @@ My demo random API hosted in heroku. All api's supports both json & jsonp format
 1. [xkcd_jsonp](https://morning-river-6203.herokuapp.com/xkcd_jsonp/callback=__jp0)
 1. [google search trends](https://morning-river-6203.herokuapp.com/google_trends)
 
-TODO:
+### Node Modules
 
-Prepare a node module for this.
+- Published a node module for [google-search-trends](https://www.npmjs.com/package/google-search-trends)

@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var request = require('request');
 var cheerio = require('cheerio');
+var gst = require('google-search-trends');
 
 var targetUrl = "http://c.xkcd.com/random/comic/";
 var googleTrendUrl = "http://hawttrends.appspot.com/api/terms/";
@@ -81,11 +82,11 @@ app.get('/xkcd_jsonp', function(req, res){
 });
 
 app.get('/google_trends', function(req, res){
-	request(googleTrendUrl, function(error, response, body){
-		if(!error && response.statusCode == 200){
-			res.jsonp(JSON.parse(body));
-		}else{
-			res.status(500).jsonp({error : error.toString()});
+	gst.result(function(err, response){
+		if(!err){
+			res.jsonp(response);
+		} else {
+			res.status(500).jsonp({error: error.toString()});
 		}
 	});
 });
